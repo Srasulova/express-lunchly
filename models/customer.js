@@ -14,6 +14,26 @@ class Customer {
     this.notes = notes;
   }
 
+  // methods for getting/setting notes(keep as empty string not null)
+
+  set notes(val) {
+    this.notes = val || "";
+  }
+
+  get notes() {
+    return this.notes;
+  }
+
+  // methods for getting/setting phone numbers
+
+  set phone(val) {
+    this._phone = val || null;
+  }
+
+  get phone() {
+    return this.phone;
+  }
+
   /** find all customers. */
 
   static async all() {
@@ -26,7 +46,7 @@ class Customer {
        FROM customers
        ORDER BY last_name, first_name`
     );
-    return results.rows.map(c => new Customer(c));
+    return results.rows.map((c) => new Customer(c));
   }
 
   /** get a customer by ID. */
@@ -51,6 +71,12 @@ class Customer {
     }
 
     return new Customer(customer);
+  }
+
+  // get full name
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
   }
 
   /** get all reservations for this customer. */
